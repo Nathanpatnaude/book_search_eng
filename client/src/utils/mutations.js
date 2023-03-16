@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 // resolver mutations login, addUser, saveBook, removeBook
 
-export const LOGIN = gql`
+export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -53,12 +53,13 @@ export const REMOVE_BOOK = gql`
       email 
       bookCount 
       savedBooks {
+        # _id
         bookId
         authors
-        title 
-        description
         image
         link
+        title 
+        description        
       }      
     }
   }

@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type User {
     _id: ID!
-    username: String!
+    username: String
     email: String
     bookCount: Int
     savedBooks: [Book]
@@ -18,6 +18,15 @@ const typeDefs = gql`
     link: String
   }
 
+  input savedBook {
+    description: String!
+    title: String!
+    bookId: String
+    image: String
+    link: String
+    authors: [String]
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -30,27 +39,10 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(bookData: BookInput!): User
+    saveBook(input: savedBook!): User
     removeBook(bookId: ID!): User
 
   }
 `;
-  //createUser,
- // getSingleUser,
-  //saveBook,
-  //deleteBook,
-  //login,
-
-// import middleware
-// const { authMiddleware } = require('../../utils/auth');
-
-// // put authMiddleware anywhere we need to send a token for verification of user
-// router.route('/').post(createUser).put(authMiddleware, saveBook);
-
-// router.route('/login').post(login);
-
-// router.route('/me').get(authMiddleware, getSingleUser);
-
-// router.route('/books/:bookId').delete(authMiddleware, deleteBook);
 
 module.exports = typeDefs;
