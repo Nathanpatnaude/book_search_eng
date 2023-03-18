@@ -17,7 +17,7 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
   // set mutation for addUser
-  const [addUser, { error}] = useMutation(ADD_USER);
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
 
   const handleInputChange = (event) => {
@@ -41,7 +41,7 @@ const SignupForm = () => {
       });
       Auth.login(data.addUser.token);
     } catch (err) {
-      console.error(err);
+      console.error(JSON.parse(JSON.stringify(err)));
       setShowAlert(true);
     }
 
